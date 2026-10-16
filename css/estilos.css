@@ -354,19 +354,25 @@ mark { background: none; color: inherit; }
 .anima .beneficio--activo .beneficio__nodo::after { animation: onda-nodo 700ms var(--ease-out) both; }
 .anima .beneficio--activo .beneficio__brillo { animation: brillo-visible 1000ms linear 250ms both; }
 .anima .beneficio--activo .beneficio__brillo::before { animation: brillo-barrido 1000ms var(--ease-in-out) 250ms both; }
-/* ---- Variante con color (?linea=color): al activarse, el punto se ilumina en azul o naranja de la marca,
-   la onda y el destello del borde salen de ese color, y luego el punto vuelve a su blanco original ---- */
+/* ---- Color: cada vez que la chispa pasa por un punto (bajando o subiendo), el punto destella en azul o
+   naranja de la marca y la onda y el destello del borde salen de ese color; en reposo el punto queda blanco ---- */
 .beneficio:nth-child(even) { --acento: var(--azul); --acento-luz: rgba(22,65,196,.85); }
 .beneficio:nth-child(odd)  { --acento: var(--naranja); --acento-luz: rgba(253,86,23,.85); }
 .beneficio__nodo::before { /* capa de color sobre el punto (solo se anima su opacidad) */
   content: ''; position: absolute; inset: 0; border-radius: 50%; opacity: 0;
   background: var(--acento); box-shadow: 0 0 calc(18 * var(--u)) calc(5 * var(--u)) var(--acento-luz);
 }
-.anima.linea-color .beneficio--activo .beneficio__nodo::before { animation: nodo-color 1600ms var(--ease-out) both; }
-.anima.linea-color .beneficio__nodo::after { border-color: var(--acento); box-shadow: 0 0 calc(12 * var(--u)) var(--acento-luz); }
-.anima.linea-color .beneficio--activo .beneficio__nodo::after { animation-duration: 900ms; }
-.linea-color .beneficio__brillo::before { background: linear-gradient(90deg, rgba(255,255,255,0), var(--acento), rgba(255,255,255,0)); }
+.anima .beneficio--activo .beneficio__nodo::before { animation: nodo-color 1600ms var(--ease-out) both; }
+.anima .beneficio__nodo::after { border-color: var(--acento); box-shadow: 0 0 calc(12 * var(--u)) var(--acento-luz); }
+.anima .beneficio--activo .beneficio__nodo::after { animation-duration: 900ms; }
+.anima .beneficio__brillo::before { background: linear-gradient(90deg, rgba(255,255,255,0), var(--acento), rgba(255,255,255,0)); }
+/* subiendo: el punto sigue encendido mientras destella y luego se apaga (JS quita .beneficio--pulso al terminar) */
+.anima .beneficio--pulso .beneficio__nodo { transform: translate(-50%, -50%); opacity: 1; }
+.anima .beneficio--pulso .beneficio__nodo::before { animation: nodo-color-sube 1100ms var(--ease-out) both; }
+.anima .beneficio--pulso .beneficio__nodo::after { animation: onda-nodo-sube 900ms var(--ease-out) both; }
 @keyframes nodo-color { 0% { opacity: 0; } 15% { opacity: 1; } 55% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes nodo-color-sube { 0% { opacity: 0; } 15% { opacity: 1; } 55% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes onda-nodo-sube { from { transform: scale(1); opacity: .6; } to { transform: scale(2.2); opacity: 0; } }
 @keyframes onda-nodo { from { transform: scale(1); opacity: .6; } to { transform: scale(2.2); opacity: 0; } }
 @keyframes brillo-visible { 0% { opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes brillo-barrido { from { transform: translateX(-100%); } to { transform: translateX(170%); } }
@@ -376,7 +382,7 @@ mark { background: none; color: inherit; }
   .anima .beneficio__nodo { transform: translate(-50%, -50%); }
   .anima .beneficio__card, .anima .beneficio--der .beneficio__card { transform: none; }
   .anima .beneficio--activo .beneficio__nodo::after, .anima .beneficio--activo .beneficio__brillo, .anima .beneficio--activo .beneficio__brillo::before { animation: none; }
-  .anima.linea-color .beneficio--activo .beneficio__nodo::before { animation: none; }
+  .anima .beneficio--activo .beneficio__nodo::before { animation: none; }
 }
 
 /* =================== FAQ =================== */

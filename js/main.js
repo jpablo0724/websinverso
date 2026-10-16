@@ -46,11 +46,25 @@ if (lineaTiempo && document.documentElement.classList.contains('anima')) {
     chispa.style.transform = `translateY(${p * alto}px)`;
     chispa.style.opacity = p > 0 && p < 1 ? '1' : '0';
     for (const li of items) {
-      if (li.classList.contains('beneficio--activo')) continue;
       const nodo = li.querySelector('.beneficio__nodo').getBoundingClientRect();
-      if (nodo.top + nodo.height / 2 <= meta + 1) li.classList.add('beneficio--activo');
+      const centro = nodo.top + nodo.height / 2;
+      const activo = li.classList.contains('beneficio--activo');
+      if (!activo && centro <= meta + 1) {
+        // bajando: se enciende de nuevo (las animaciones arrancan otra vez al volver a poner la clase)
+        li.classList.remove('beneficio--pulso');
+        li.classList.add('beneficio--activo');
+      } else if (activo && centro > meta + 20) {
+        // subiendo: la chispa se devuelve por el punto, destella en color y luego se apaga
+        li.classList.remove('beneficio--activo');
+        if (!sinMovimiento.matches) li.classList.add('beneficio--pulso');
+      }
     }
   };
+
+  const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+  lineaTiempo.addEventListener('animationend', (e) => {
+    if (e.animationName === 'nodo-color-sube') e.target.closest('.beneficio').classList.remove('beneficio--pulso');
+  });
 
   const pedir = () => {
     if (!pendiente) {
