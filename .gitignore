@@ -2,3 +2,7 @@
 diseno/mockup.pdf
 diseno/creativos/
 diseno/fuentes/
+
+# Skills de Claude Code instaladas con npx skills (herramientas locales, no son parte del sitio)
+.claude/
+skills-lock.json
