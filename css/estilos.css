@@ -127,21 +127,12 @@ mark { background: none; color: inherit; }
 .perdidas__card {
   max-width: calc(1378 * var(--u)); margin: 0 auto; min-height: calc(458 * var(--u));
   border-radius: calc(50 * var(--u)); color: var(--negro);
-  /* casi blanca, con gris suave abajo a la izquierda y en el borde derecho (medido en el mockup) */
-  background:
-    radial-gradient(ellipse 30% 95% at 0% 100%, #e0e2e4 0%, rgba(224,226,228,0) 100%),
-    radial-gradient(ellipse 16% 80% at 100% 100%, #dcdee0 0%, rgba(220,222,224,0) 100%),
-    linear-gradient(90deg, rgba(236,238,240,0) 80%, #e8eaec 100%),
-    #fefefe;
+  /* textura con el mismo tamaño, espejo y desplazamiento que en el PDF: se ven las ondas grises */
+  background: #fefefe url('../assets/img/textura-blanca-espejo.webp') calc(-84 * var(--u)) calc(-321 * var(--u)) / calc(2274 * var(--u)) calc(1084 * var(--u)) no-repeat;
   box-shadow: 0 calc(10 * var(--u)) calc(40 * var(--u)) rgba(0,0,0,.35);
   display: grid; grid-template-columns: calc(745 * var(--u)) 1fr; column-gap: calc(34 * var(--u)); align-items: center;
   position: relative; overflow: hidden; isolation: isolate;
   padding: calc(85 * var(--u)) 0 calc(80 * var(--u));
-}
-/* reflejo tipo vidrio: la textura blanca volteada (la onda sube desde abajo a la izquierda), suavizada */
-.perdidas__card::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: url('../assets/img/textura-blanca.webp') center/cover; transform: scaleY(-1); opacity: .22;
 }
 .perdidas__titulo { text-align: right; font-family: var(--f-titulo); }
 .perdidas__titulo span { display: block; }
@@ -163,7 +154,7 @@ mark { background: none; color: inherit; }
 .pizarra__frase--izq { left: calc(217 * var(--u)); top: calc(672 * var(--u)); }
 .pizarra__card {
   position: absolute; left: calc(235 * var(--u)); width: calc(969 * var(--u)); min-height: calc(177 * var(--u)); top: calc(-96 * var(--u)); /* mitad sobre la foto, mitad fuera */
-  background: #FEFEFE url('../assets/img/textura-blanca.webp') center/cover; color: var(--negro);
+  background: #FEFEFE url('../assets/img/textura-blanca-espejo.webp') calc(-18 * var(--u)) calc(-440 * var(--u)) / calc(1115 * var(--u)) calc(685 * var(--u)) no-repeat; color: var(--negro);
   border-radius: calc(24 * var(--u)); text-align: center;
   padding: calc(24 * var(--u)) calc(20 * var(--u)) calc(22 * var(--u));
   font-size: calc(18.25 * var(--u)); line-height: calc(25.1 * var(--u)); letter-spacing: -.04em;
@@ -185,7 +176,7 @@ mark { background: none; color: inherit; }
 .titulo-linea--oscuro { border-color: var(--negro); }
 .sistemas p { font-size: calc(20.1 * var(--u)); line-height: calc(22.3 * var(--u)); letter-spacing: .01em; }
 .sistemas__card {
-  background: #fff url('../assets/img/textura-blanca.webp') center/cover; color: var(--negro);
+  background: #fff url('../assets/img/textura-blanca-transpuesta.webp') calc(-210 * var(--u)) calc(-305 * var(--u)) / calc(1075 * var(--u)) calc(611 * var(--u)) no-repeat; color: var(--negro);
   border-radius: calc(24 * var(--u)); min-height: calc(280 * var(--u));
   padding: calc(32 * var(--u)) calc(17 * var(--u)) calc(30 * var(--u)) calc(24 * var(--u));
 }
@@ -411,6 +402,7 @@ mark { background: none; color: inherit; }
   .enemigo__caja { margin: 26px 0 0; width: auto; padding: 18px 20px; font-size: 15px; line-height: 21px; border-radius: 18px; letter-spacing: -.02em; }
 
   .perdidas { padding: 0 12px; }
+  .perdidas__card, .pizarra__card, .sistemas__card { background-size: cover; background-position: center; }
   .perdidas__card { grid-template-columns: 1fr; padding: 44px 24px 50px; row-gap: 30px; border-radius: 28px; }
   .perdidas__titulo { text-align: left; }
   .perdidas__titulo .xl { font-size: 24px; line-height: 28px; }
