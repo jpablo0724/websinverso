@@ -58,9 +58,8 @@ mark { background: none; color: inherit; }
 .boton {
   display: inline-flex; align-items: center; justify-content: center; gap: calc(12 * var(--u));
   background: var(--blanco); color: #000; border-radius: 999px;
-  font-family: var(--f-texto); font-weight: 400; transition: transform .2s, box-shadow .2s;
+  font-family: var(--f-texto); font-weight: 400;
 }
-.boton:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,.15); }
 .flecha { width: auto; }
 .flecha--der { transform: scaleX(-1); }
 
@@ -69,9 +68,6 @@ mark { background: none; color: inherit; }
 .header__in { height: 100%; display: flex; align-items: center; padding: 0 calc(64 * var(--u)); }
 .header__logo img { width: calc(192 * var(--u)); }
 .header__nav { display: flex; gap: calc(58 * var(--u)); margin-left: calc(174 * var(--u)); font-size: calc(20.1 * var(--u)); color: #F1F1F1; }
-.header__nav a { position: relative; }
-.header__nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: currentColor; transform: scaleX(0); transition: transform .25s; }
-.header__nav a:hover::after { transform: scaleX(1); }
 .boton--header { margin-left: auto; width: calc(185 * var(--u)); height: calc(54 * var(--u)); font-size: calc(20.1 * var(--u)); }
 .boton--header .flecha { height: calc(15 * var(--u)); }
 .header__hamburguesa { display: none; }
@@ -129,7 +125,6 @@ mark { background: none; color: inherit; }
   border-radius: calc(50 * var(--u)); color: var(--negro);
   /* textura con el mismo tamaño, espejo y desplazamiento que en el PDF: se ven las ondas grises */
   background: #fefefe url('../assets/img/textura-blanca-espejo.webp') calc(-84 * var(--u)) calc(-321 * var(--u)) / calc(2274 * var(--u)) calc(1084 * var(--u)) no-repeat;
-  box-shadow: 0 calc(10 * var(--u)) calc(40 * var(--u)) rgba(0,0,0,.35);
   display: grid; grid-template-columns: calc(745 * var(--u)) 1fr; column-gap: calc(34 * var(--u)); align-items: center;
   position: relative; overflow: hidden; isolation: isolate;
   padding: calc(85 * var(--u)) 0 calc(80 * var(--u));
@@ -149,7 +144,7 @@ mark { background: none; color: inherit; }
 /* la foto arranca detrás de la tarjeta blanca: sus esquinas superiores asoman a los lados */
 .pizarra__foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; filter: brightness(.82); }
 .pizarra__textos { height: 100%; }
-.pizarra__frase { position: absolute; font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(37.2 * var(--u)); line-height: calc(37.5 * var(--u)); color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+.pizarra__frase { position: absolute; font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(37.2 * var(--u)); line-height: calc(37.5 * var(--u)); color: #fff; }
 .pizarra__frase--der { right: calc(218 * var(--u)); top: calc(349 * var(--u)); text-align: right; }
 .pizarra__frase--izq { left: calc(217 * var(--u)); top: calc(672 * var(--u)); }
 .pizarra__card {
@@ -238,9 +233,8 @@ mark { background: none; color: inherit; }
   height: calc(191 * var(--u)); border-radius: calc(24 * var(--u));
   background: var(--gris-card) center/100% 100% no-repeat;
   display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 0 calc(28 * var(--u)) calc(26 * var(--u)); transition: transform .25s;
+  padding: 0 calc(28 * var(--u)) calc(26 * var(--u));
 }
-.servicio:hover { transform: translateY(-4px); }
 .servicio--blanca  { background-image: url('../assets/img/card-blanca.webp'); }
 .servicio--naranja { background-image: url('../assets/img/card-naranja.webp'); }
 .servicio--azul    { background-image: url('../assets/img/card-azul.webp'); }
@@ -306,7 +300,6 @@ mark { background: none; color: inherit; }
 .faq__resp { padding: 0 0 calc(32 * var(--u)); }
 .faq__cabeza { font-family: var(--f-titulo); font-weight: var(--w-bk); font-size: calc(24.2 * var(--u)); line-height: calc(26.3 * var(--u)); margin-bottom: calc(14 * var(--u)); }
 .faq__parrafo { margin-top: calc(26 * var(--u)); padding-left: calc(23 * var(--u)); max-width: calc(905 * var(--u)); font-size: calc(17.6 * var(--u)); line-height: calc(23.5 * var(--u)); letter-spacing: .01em; }
-.faq__pendiente { font-size: calc(17.6 * var(--u)); opacity: .6; padding-left: calc(23 * var(--u)); }
 .viñetas { position: relative; padding-left: calc(23 * var(--u)); font-size: calc(17.6 * var(--u)); letter-spacing: .01em; }
 .viñetas::before { content: ''; position: absolute; left: calc(13 * var(--u)); top: calc(12 * var(--u)); bottom: calc(12 * var(--u)); width: 1px; background: #fff; }
 .viñetas li { position: relative; line-height: calc(29.5 * var(--u)); }
@@ -351,10 +344,8 @@ mark { background: none; color: inherit; }
 .footer__logo { position: absolute; left: calc(232 * var(--u)); top: calc(60 * var(--u)); width: calc(293 * var(--u)); opacity: .85; }
 .footer__lema { position: absolute; right: calc(233 * var(--u)); top: calc(80 * var(--u)); text-align: right; font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(59.4 * var(--u)); line-height: calc(59.4 * var(--u)); color: #DADADA; }
 .footer__nav { position: absolute; left: calc(232 * var(--u)); top: calc(305 * var(--u)); display: flex; flex-direction: column; font-size: calc(25.6 * var(--u)); line-height: calc(61.3 * var(--u)); color: #E2E2E2; }
-.footer__nav a:hover { color: #fff; }
 .footer__redes { position: absolute; right: calc(230 * var(--u)); top: calc(588 * var(--u)); display: flex; gap: calc(26 * var(--u)); align-items: center; }
-.footer__redes img { height: calc(48 * var(--u)); width: auto; opacity: .92; transition: opacity .2s; }
-.footer__redes a:hover img { opacity: 1; }
+.footer__redes img { height: calc(48 * var(--u)); width: auto; opacity: .92; }
 
 /* =========================================================
    MÓVIL (menos de 760 px): una columna
@@ -477,7 +468,7 @@ mark { background: none; color: inherit; }
   .faq summary::after { width: 18px; height: 18px; margin-right: 4px; flex: none; }
   .faq__cabeza { font-size: 17px; line-height: 21px; }
   .faq__cabeza br { display: none; }
-  .viñetas, .faq__parrafo, .faq__pendiente { font-size: 15px; }
+  .viñetas, .faq__parrafo { font-size: 15px; }
   .viñetas li { line-height: 22px; margin-bottom: 6px; }
   .viñetas li::before { top: 6.5px; }
   .faq__parrafo { line-height: 21px; }
