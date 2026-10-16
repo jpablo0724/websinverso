@@ -79,7 +79,12 @@ if (lineaTiempo && document.documentElement.classList.contains('anima')) {
 
 // Banner: con "reducir movimiento" activo no se reproduce y queda fijo en el mensaje final.
 const videoBanner = document.querySelector('.banner__video');
-if (videoBanner) {
+// Con ?banner=b se prueba la animación en código: el video se quita para que no se descargue.
+if (videoBanner && document.documentElement.classList.contains('banner-b')) {
+  videoBanner.removeAttribute('src');
+  videoBanner.load();
+  videoBanner.remove();
+} else if (videoBanner) {
   const reducir = window.matchMedia('(prefers-reduced-motion: reduce)');
   const aplicar = () => {
     if (reducir.matches) {

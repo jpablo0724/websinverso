@@ -11,9 +11,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;400;600;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css?v=20261016c">
-  <!-- Activa las animaciones de entrada solo si hay JS; sin JS todo se ve completo. ?anim=neon elige la opción 2 del rompecabezas -->
-  <script>document.documentElement.classList.add('anima'); if (/[?&]anim=neon/.test(location.search)) document.documentElement.classList.add('anima-neon');</script>
+  <link rel="stylesheet" href="css/estilos.css?v=20261016d">
+  <!-- Activa las animaciones de entrada solo si hay JS; sin JS todo se ve completo. ?anim=neon elige la opción 2 del rompecabezas; ?banner=b prueba el banner animado en código (plan B) -->
+  <script>document.documentElement.classList.add('anima'); if (/[?&]anim=neon/.test(location.search)) document.documentElement.classList.add('anima-neon'); if (/[?&]banner=b/.test(location.search)) document.documentElement.classList.add('banner-b');</script>
 </head>
 <body>
 
@@ -40,6 +40,24 @@
 <section class="banner" aria-label="Sinverso: solo crecimiento con dirección">
   <video class="banner__video" src="assets/video/banner.mp4" poster="assets/video/banner-poster.jpg"
          autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+
+  <!-- Plan B (?banner=b): misma historia que el video —del caos a la dirección— hecha en código -->
+  <div class="bb" aria-hidden="true">
+    <img src="assets/img/isotipo-trazo.webp" alt="" class="bb__fondo">
+    <div class="bb__palabras">
+      <span class="bb__p bb__p--centro" style="--x:0;--y:0;--dx:0;--dy:-6;--d:.15s">ESTRATEGIA</span>
+      <span class="bb__p" style="--x:-250;--y:-120;--dx:-30;--dy:-14;--d:0s">VENTAS</span>
+      <span class="bb__p" style="--x:270;--y:-140;--dx:34;--dy:-10;--d:.3s">TECNOLOGÍA</span>
+      <span class="bb__p bb__p--chica" style="--x:-410;--y:6;--dx:-40;--dy:4;--d:.45s">CONTENIDO</span>
+      <span class="bb__p bb__p--chica" style="--x:390;--y:-10;--dx:42;--dy:-4;--d:.2s">DATOS</span>
+      <span class="bb__p" style="--x:-30;--y:96;--dx:-6;--dy:24;--d:.35s">CRM</span>
+      <span class="bb__p" style="--x:330;--y:120;--dx:36;--dy:18;--d:.1s">PAUTA</span>
+      <span class="bb__p bb__p--chica" style="--x:-330;--y:150;--dx:-34;--dy:22;--d:.5s">AUTOMATIZACIÓN</span>
+    </div>
+    <div class="bb__rumbo"><span class="bb__punto bb__punto--azul"></span><span class="bb__linea"></span><span class="bb__punto bb__punto--naranja"></span></div>
+    <img src="assets/img/logo-sinverso.webp" alt="" class="bb__logo">
+    <p class="bb__lema"><span><span>SOLO CRECIMIENTO</span></span><span><span>CON <em>DIRECCIÓN</em></span></span></p>
+  </div>
 </section>
 
 <!-- ============ MANIFIESTO ============ -->
@@ -391,6 +409,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261016c"></script>
+<script src="js/main.js?v=20261016d"></script>
 </body>
 </html>

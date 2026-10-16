@@ -81,6 +81,103 @@ mark { background: none; color: inherit; }
 /* El video (2.45:1) llena el banner recortando los bordes; su contenido va centrado. */
 .banner__video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
+/* ---- Plan B del banner (?banner=b): animación en código, ciclo de 12 s ----
+   0–4 s caos de palabras que se juntan · 4–6 s dos puntos (azul/naranja) trazan el rumbo ·
+   6–8.5 s aparece el logo de izquierda a derecha · 8.8–12 s el lema "Solo crecimiento con dirección". */
+.bb { display: none; }
+.banner-b .banner__video { display: none; }
+.banner-b .bb { display: block; position: relative; height: 100%; background: var(--negro); overflow: hidden; --ciclo: 12s; }
+.bb > *, .bb__p { position: absolute; left: 50%; top: 50%; }
+
+.bb__fondo { width: calc(1500 * var(--u)); max-width: none; opacity: .045; transform: translate(-50%, -50%); animation: bb-fondo var(--ciclo) linear infinite; }
+@keyframes bb-fondo {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to   { transform: translate(-53%, -50%) scale(1.06); }
+}
+
+.bb__palabras { inset: 0; left: 0; top: 0; }
+.bb__p {
+  font-family: var(--f-texto); font-weight: 700; font-size: calc(30 * var(--u)); letter-spacing: .02em; white-space: nowrap;
+  color: rgba(242, 242, 242, .72); text-shadow: 0 0 calc(18 * var(--u)) rgba(255, 255, 255, .25);
+  opacity: 0; animation: bb-palabra var(--ciclo) var(--d) infinite;
+}
+.bb__p--chica { font-size: calc(20 * var(--u)); color: rgba(242, 242, 242, .5); }
+.bb__p--centro { font-size: calc(58 * var(--u)); color: #fff; text-shadow: 0 0 calc(26 * var(--u)) rgba(255, 255, 255, .35); }
+@keyframes bb-palabra {
+  0% { opacity: 0; filter: blur(8px); transform: translate(-50%, -50%) translate(calc(var(--x) * var(--ex, 1) * var(--u)), calc(var(--y) * var(--u))) scale(.9); animation-timing-function: var(--ease-out); }
+  7% { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) translate(calc(var(--x) * var(--ex, 1) * var(--u)), calc(var(--y) * var(--u))) scale(1); }
+  25% { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) translate(calc((var(--x) + var(--dx)) * var(--ex, 1) * var(--u)), calc((var(--y) + var(--dy)) * var(--u))) scale(1); animation-timing-function: var(--ease-in-out); }
+  32%, 100% { opacity: 0; filter: blur(4px); transform: translate(-50%, -50%) scale(.15); }
+}
+
+.bb__rumbo { left: 0; top: 50%; width: 100%; height: 0; }
+.bb__punto, .bb__linea { position: absolute; left: 50%; top: 0; }
+.bb__punto { width: calc(26 * var(--u)); height: calc(26 * var(--u)); margin: calc(-13 * var(--u)) 0 0 calc(-13 * var(--u)); border-radius: calc(6 * var(--u)); opacity: 0; }
+.bb__punto--azul { background: var(--azul); box-shadow: 0 0 calc(30 * var(--u)) rgba(22, 65, 196, .7); animation: bb-punto-izq var(--ciclo) infinite; }
+.bb__punto--naranja { background: var(--naranja); box-shadow: 0 0 calc(30 * var(--u)) rgba(253, 86, 23, .7); animation: bb-punto-der var(--ciclo) infinite; }
+.bb__linea {
+  width: calc(600 * var(--u)); height: calc(3 * var(--u)); margin: calc(-1.5 * var(--u)) 0 0 calc(-300 * var(--u));
+  background: linear-gradient(90deg, var(--azul), var(--naranja)); transform: scaleX(0); opacity: 0;
+  animation: bb-linea var(--ciclo) infinite;
+}
+@keyframes bb-punto-izq {
+  0%, 32% { opacity: 0; transform: scale(0); }
+  35.8% { opacity: 1; transform: scale(1); animation-timing-function: var(--ease-in-out); }
+  44.2%, 48.3% { opacity: 1; transform: translateX(calc(-300 * var(--u))) scale(1); }
+  51.7%, 100% { opacity: 0; transform: translateX(calc(-300 * var(--u))) scale(.4); }
+}
+@keyframes bb-punto-der {
+  0%, 32% { opacity: 0; transform: scale(0); }
+  35.8% { opacity: 1; transform: scale(1); animation-timing-function: var(--ease-in-out); }
+  44.2%, 48.3% { opacity: 1; transform: translateX(calc(300 * var(--u))) scale(1); }
+  51.7%, 100% { opacity: 0; transform: translateX(calc(300 * var(--u))) scale(.4); }
+}
+@keyframes bb-linea {
+  0%, 35.8% { opacity: 0; transform: scaleX(0); animation-timing-function: var(--ease-in-out); }
+  36.5% { opacity: 1; }
+  44.2%, 48.3% { opacity: 1; transform: scaleX(1); }
+  51.7%, 100% { opacity: 0; transform: scaleX(1); }
+}
+
+.bb__logo { width: calc(420 * var(--u)); transform: translate(-50%, -50%); opacity: 0; animation: bb-logo var(--ciclo) infinite; }
+@keyframes bb-logo {
+  0%, 49.2% { opacity: 0; clip-path: inset(0 100% 0 0); filter: blur(6px); transform: translate(-50%, -50%) scale(.96); animation-timing-function: var(--ease-out); }
+  57.5% { opacity: 1; clip-path: inset(0 0 0 0); filter: blur(0); transform: translate(-50%, -50%) scale(1); }
+  68.3% { opacity: 1; clip-path: inset(0 0 0 0); filter: blur(0); transform: translate(-50%, -50%) scale(1.02); }
+  72.5%, 100% { opacity: 0; clip-path: inset(0 0 0 0); filter: blur(6px); transform: translate(-50%, -50%) scale(1.06); }
+}
+
+.bb__lema {
+  margin: 0; transform: translate(-50%, -50%); text-align: center; white-space: nowrap;
+  font-family: var(--f-texto); font-weight: 700; font-size: calc(64 * var(--u)); line-height: 1.15; color: var(--blanco);
+}
+.bb__lema > span { display: block; overflow: hidden; padding-bottom: calc(10 * var(--u)); }
+.bb__lema > span > span { display: block; transform: translateY(140%); opacity: 0; animation: bb-lema var(--ciclo) infinite; }
+.bb__lema > span + span > span { animation-delay: .15s; }
+.bb__lema em { font-style: normal; position: relative; }
+.bb__lema em::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: calc(-6 * var(--u)); height: calc(5 * var(--u));
+  border-radius: calc(3 * var(--u)); background: var(--naranja); transform: scaleX(0); transform-origin: left;
+  animation: bb-subrayado var(--ciclo) infinite;
+}
+@keyframes bb-lema {
+  0%, 72.5% { transform: translateY(140%); opacity: 0; }
+  73.3% { transform: translateY(140%); opacity: 1; animation-timing-function: var(--ease-out); }
+  79.2%, 94% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+@keyframes bb-subrayado {
+  0%, 80% { transform: scaleX(0); animation-timing-function: var(--ease-out); }
+  85.5%, 94% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+/* Sin movimiento: solo el lema, fijo */
+@media (prefers-reduced-motion: reduce) {
+  .bb *, .bb *::after { animation: none !important; }
+  .bb__palabras, .bb__rumbo, .bb__logo { display: none; }
+  .bb__lema > span > span, .bb__lema em::after { transform: none; opacity: 1; }
+}
+
 /* =================== MANIFIESTO =================== */
 .manifiesto {
   position: relative; overflow: hidden; min-height: calc(681 * var(--u));
@@ -477,6 +574,7 @@ mark { background: none; color: inherit; }
   .header.abierto .header__hamburguesa span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .banner { height: 56vw; min-height: 220px; }
+  .bb { --u: calc(100vw / 1000); --ex: .72; } /* en celular el plan B se ve más grande y las palabras se acercan al centro */
 
   .manifiesto { min-height: 0; padding: 90px 0 90px; }
   .manifiesto__deco { width: 200px; opacity: .5; }
