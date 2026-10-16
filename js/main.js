@@ -76,3 +76,21 @@ if (lineaTiempo && document.documentElement.classList.contains('anima')) {
   window.addEventListener('resize', pedir);
   actualizar();
 }
+
+// Banner: con "reducir movimiento" activo no se reproduce y queda fijo en el mensaje final.
+const videoBanner = document.querySelector('.banner__video');
+if (videoBanner) {
+  const reducir = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const aplicar = () => {
+    if (reducir.matches) {
+      videoBanner.pause();
+      const alFinal = () => { videoBanner.currentTime = Math.max(0, videoBanner.duration - 0.1); };
+      if (videoBanner.readyState >= 1) alFinal();
+      else videoBanner.addEventListener('loadedmetadata', alFinal, { once: true });
+    } else {
+      videoBanner.play().catch(() => {});
+    }
+  };
+  reducir.addEventListener('change', aplicar);
+  aplicar();
+}

@@ -77,8 +77,9 @@ mark { background: none; color: inherit; }
 .header__hamburguesa { display: none; }
 
 /* =================== BANNER =================== */
-.banner { height: calc(691 * var(--u)); background: var(--blanco); display: grid; place-items: center; }
-.banner__placeholder { font-family: var(--f-titulo); font-weight: var(--w-xl); font-size: calc(37.9 * var(--u)); color: #000; }
+.banner { height: calc(691 * var(--u)); background: #1a1a1a; overflow: hidden; }
+/* El video (2.45:1) llena el banner recortando los bordes; su contenido va centrado. */
+.banner__video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* =================== MANIFIESTO =================== */
 .manifiesto {
@@ -476,7 +477,6 @@ mark { background: none; color: inherit; }
   .header.abierto .header__hamburguesa span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .banner { height: 56vw; min-height: 220px; }
-  .banner__placeholder { font-size: 22px; }
 
   .manifiesto { min-height: 0; padding: 90px 0 90px; }
   .manifiesto__deco { width: 200px; opacity: .5; }
