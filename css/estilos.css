@@ -127,7 +127,13 @@ mark { background: none; color: inherit; }
 .perdidas__card {
   max-width: calc(1378 * var(--u)); margin: 0 auto; min-height: calc(458 * var(--u));
   border-radius: calc(50 * var(--u)); color: var(--negro);
-  background: #EDEDED url('../assets/img/textura-blanca.webp') center/cover;
+  /* casi blanca, con gris suave abajo a la izquierda y en el borde derecho (medido en el mockup) */
+  background:
+    radial-gradient(ellipse 30% 95% at 0% 100%, #d9dbdd 0%, rgba(217,219,221,0) 100%),
+    radial-gradient(ellipse 16% 80% at 100% 100%, #dcdee0 0%, rgba(220,222,224,0) 100%),
+    linear-gradient(90deg, rgba(236,238,240,0) 80%, #e8eaec 100%),
+    #fefefe;
+  box-shadow: 0 calc(10 * var(--u)) calc(40 * var(--u)) rgba(0,0,0,.35);
   display: grid; grid-template-columns: calc(745 * var(--u)) 1fr; column-gap: calc(49 * var(--u)); align-items: center;
   padding: calc(85 * var(--u)) 0 calc(80 * var(--u));
 }
@@ -141,13 +147,14 @@ mark { background: none; color: inherit; }
 .perdidas__lista .perdidas__final { font-weight: var(--w-bd); margin-top: calc(26.5 * var(--u)); }
 
 /* =================== FOTO PIZARRA =================== */
-.pizarra { position: relative; margin-top: calc(-60 * var(--u)); padding-bottom: calc(81 * var(--u)); }
-.pizarra__foto { position: relative; height: calc(745 * var(--u)); border-radius: 0 0 calc(40 * var(--u)) calc(40 * var(--u)); overflow: hidden; }
-.pizarra__foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; filter: brightness(.82); }
+.pizarra { position: relative; margin-top: calc(-243 * var(--u)); padding-bottom: calc(81 * var(--u)); }
+.pizarra__foto { position: relative; height: calc(928 * var(--u)); border-radius: calc(40 * var(--u)); overflow: hidden; border: 1px solid rgba(255,255,255,.35); }
+/* la foto arranca detrás de la tarjeta blanca: sus esquinas superiores asoman a los lados */
+.pizarra__foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; filter: brightness(.82); }
 .pizarra__textos { height: 100%; }
 .pizarra__frase { position: absolute; font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(37.2 * var(--u)); line-height: calc(37.5 * var(--u)); color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
-.pizarra__frase--der { right: calc(218 * var(--u)); top: calc(166 * var(--u)); text-align: right; }
-.pizarra__frase--izq { left: calc(217 * var(--u)); top: calc(489 * var(--u)); }
+.pizarra__frase--der { right: calc(218 * var(--u)); top: calc(349 * var(--u)); text-align: right; }
+.pizarra__frase--izq { left: calc(217 * var(--u)); top: calc(672 * var(--u)); }
 .pizarra__card {
   position: absolute; left: calc(235 * var(--u)); width: calc(969 * var(--u)); min-height: calc(177 * var(--u)); top: calc(-96 * var(--u)); /* mitad sobre la foto, mitad fuera */
   background: #FEFEFE url('../assets/img/textura-blanca.webp') center/cover; color: var(--negro);
@@ -407,6 +414,7 @@ mark { background: none; color: inherit; }
   .perdidas__puntos { top: 12px; height: 204px; }
 
   .pizarra { margin-top: -40px; padding-bottom: 0; }
+  .pizarra__foto { border-radius: 0 0 28px 28px; border: 0; }
   .pizarra__foto { height: 480px; border-radius: 0 0 28px 28px; }
   .pizarra__foto > img { object-position: 60% 50%; }
   .pizarra__frase { font-size: 24px; line-height: 26px; }
