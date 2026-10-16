@@ -190,35 +190,18 @@ mark { background: none; color: inherit; }
 .metodo__titulo { font-weight: var(--w-bd); font-size: calc(55.1 * var(--u)); line-height: calc(54 * var(--u)); }
 .metodo__sub { font-family: var(--f-texto); font-size: calc(19.15 * var(--u)); line-height: calc(21.2 * var(--u)); margin-top: calc(6 * var(--u)); letter-spacing: .01em; }
 
-/* Las piezas se ubican en una caja de 1080 × 956 con las mismas coordenadas del mockup */
-.puzzle { position: relative; width: calc(1080 * var(--u)); height: calc(956 * var(--u)); margin: calc(18 * var(--u)) auto 0; }
-.puzzle__logo { position: absolute; left: calc(421 * var(--u)); top: calc(404 * var(--u)); width: calc(245 * var(--u)); }
-.pieza { position: absolute; }
-.pieza__forma { width: 100%; height: 100%; }
-.pieza__contenido {
-  position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+/* Rompecabezas: caja de 1080 × 957 (x 180, y 4406 del mockup). Piezas, íconos y textos van en
+   las coordenadas exactas del PDF; los textos se ubican por su línea base (--b) como en el diseño. */
+.puzzle { position: relative; width: calc(1080 * var(--u)); height: calc(957 * var(--u)); margin: calc(18 * var(--u)) auto 0; }
+.puzzle__logo { position: absolute; left: calc(420 * var(--u)); top: calc(409 * var(--u)); width: calc(245 * var(--u)); }
+.pz-caja { position: absolute; left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u)); width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u)); max-width: none; }
+.pz-txt {
+  position: absolute; white-space: nowrap; line-height: 1; letter-spacing: calc(var(--ls, 0) * var(--u));
+  left: calc(var(--x) * var(--u)); top: calc((var(--b) - .85 * var(--f)) * var(--u)); font-size: calc(var(--f) * var(--u));
 }
-.pieza__icono { height: calc(88 * var(--u)); width: auto; margin-bottom: calc(4 * var(--u)); }
-.pieza h3 { font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(39 * var(--u)); line-height: 1; display: flex; align-items: baseline; }
-.pieza__num { font-size: calc(55 * var(--u)); color: rgba(242,242,242,.5); letter-spacing: calc(-3 * var(--u)); margin-right: calc(5 * var(--u)); }
-.pieza ul { margin-top: calc(6 * var(--u)); font-size: calc(18.9 * var(--u)); line-height: calc(24.9 * var(--u)); }
-.pieza ul.apretada li { line-height: calc(18 * var(--u)); margin-bottom: calc(8 * var(--u)); }
-
-/* posición de cada pieza (imagen) y de su contenido (el cuadrado interior) */
-.pieza--atraer    { left: calc(372 * var(--u)); top: 0;                     width: calc(423 * var(--u)); height: calc(348 * var(--u)); }
-.pieza--crecer    { left: 0;                    top: calc(218 * var(--u));  width: calc(422 * var(--u)); height: calc(428 * var(--u)); }
-.pieza--captar    { left: calc(657 * var(--u)); top: calc(218 * var(--u));  width: calc(422 * var(--u)); height: calc(428 * var(--u)); }
-.pieza--convertir { left: calc(137 * var(--u)); top: calc(608 * var(--u));  width: calc(423 * var(--u)); height: calc(348 * var(--u)); }
-.pieza--gestionar { left: calc(520 * var(--u)); top: calc(608 * var(--u));  width: calc(423 * var(--u)); height: calc(348 * var(--u)); }
-.pieza--atraer    .pieza__contenido { left: calc(26 * var(--u));  top: calc(26 * var(--u)); width: calc(289 * var(--u)); height: calc(297 * var(--u)); }
-.pieza--crecer    .pieza__contenido { left: calc(107 * var(--u)); top: calc(106 * var(--u)); width: calc(292 * var(--u)); height: calc(297 * var(--u)); }
-.pieza--captar    .pieza__contenido { left: calc(26 * var(--u));  top: calc(106 * var(--u)); width: calc(293 * var(--u)); height: calc(297 * var(--u)); }
-.pieza--convertir .pieza__contenido { left: calc(111 * var(--u)); top: calc(26 * var(--u));  width: calc(289 * var(--u)); height: calc(296 * var(--u)); }
-.pieza--gestionar .pieza__contenido { left: calc(26 * var(--u));  top: calc(26 * var(--u));  width: calc(290 * var(--u)); height: calc(296 * var(--u)); }
-.pieza--atraer .pieza__icono { height: calc(96 * var(--u)); }
-.pieza--atraer h3 { font-size: calc(43 * var(--u)); }
-.pieza--gestionar .pieza__icono { height: calc(78 * var(--u)); }
-.pieza--captar .pieza__icono { height: calc(72 * var(--u)); }
+.pz-centro { transform: translateX(-50%); }
+.pieza__titulo { font-family: var(--f-titulo); font-weight: var(--w-bd); }
+.pieza__num { color: rgba(242,242,242,.5); }
 
 /* =================== SERVICIOS =================== */
 .servicios { position: relative; padding: calc(133 * var(--u)) 0 calc(139 * var(--u)); }
@@ -428,16 +411,17 @@ mark { background: none; color: inherit; }
   .metodo__sub br { display: none; }
   .puzzle { width: auto; height: auto; margin-top: 34px; display: grid; gap: 14px; }
   .puzzle__logo { position: static; width: 150px; margin: 0 auto 10px; order: -1; }
-  .pieza { position: static; width: auto !important; height: auto !important;
+  .pieza { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
     border: 1.5px solid rgba(255,255,255,.85); border-radius: 22px; box-shadow: 0 0 14px rgba(255,255,255,.25), inset 0 0 10px rgba(255,255,255,.08);
     background: rgba(20,20,20,.55); padding: 22px 16px; }
   .pieza__forma { display: none; }
-  .pieza__contenido { position: static; width: auto !important; height: auto !important; }
-  .pieza__icono, .pieza--atraer .pieza__icono, .pieza--captar .pieza__icono, .pieza--gestionar .pieza__icono { height: 60px; }
-  .pieza h3, .pieza--atraer h3 { font-size: 28px; }
-  .pieza__num { font-size: 38px; letter-spacing: -2px; }
-  .pieza ul { font-size: 16px; line-height: 22px; }
-  .pieza ul.apretada li { line-height: 20px; margin-bottom: 4px; }
+  .pz-caja, .pz-txt { position: static; transform: none; width: auto; height: auto; letter-spacing: 0; }
+  .pieza__icono { height: 60px; margin-bottom: 6px; }
+  .pieza__titulo { display: flex; align-items: baseline; gap: 4px; font-size: 28px; line-height: 1; }
+  .pieza__titulo .pz-txt { font-size: 28px; }
+  .pieza__titulo .pieza__num { font-size: 38px; letter-spacing: -2px; }
+  .pieza__lista { margin-top: 8px; }
+  .pieza__lista .pz-txt { font-size: 16px; line-height: 22px; }
 
   .servicios { padding: 70px 0 70px; }
   .servicios__forma { left: auto; right: -60px; top: -40px; width: 200px; }
