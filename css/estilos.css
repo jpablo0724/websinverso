@@ -28,6 +28,7 @@
 
   /* Curva de entrada (desaceleración fuerte) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --w-bd: 900;   /* Bold: Urbanist necesita 900 para igualar la cantidad de tinta de AG Bold (medido) */
 }
 
@@ -294,31 +295,75 @@ mark { background: none; color: inherit; }
 .beneficios__titulo { margin-left: calc(474 * var(--u)); font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(63 * var(--u)); line-height: calc(76 * var(--u)); color: #D9D9D9; }
 .beneficios__titulo .bk { color: #CFCFCF; }
 .linea-tiempo { position: relative; margin: calc(25 * var(--u)) 0 0 calc(184 * var(--u)); width: calc(1072 * var(--u)); }
-.linea-tiempo::before { /* línea vertical con resplandor */
-  content: ''; position: absolute; left: calc(535 * var(--u) - 1.5 * var(--u)); width: calc(3 * var(--u));
-  top: calc(114 * var(--u)); bottom: calc(114 * var(--u)); background: #D2D1D1;
+.linea-tiempo__deco { position: absolute; inset: 0; pointer-events: none; }
+.linea-tiempo__linea { /* línea vertical con resplandor */
+  position: absolute; left: calc(535 * var(--u) - 1.5 * var(--u)); width: calc(3 * var(--u));
+  top: calc(114 * var(--u)); bottom: calc(114 * var(--u)); background: #D2D1D1; transform-origin: top;
   box-shadow: 0 0 calc(10 * var(--u)) rgba(255,255,255,.7);
 }
+.linea-tiempo__chispa { /* punto de luz que recorre la línea (solo con la animación) */
+  position: absolute; left: calc(535 * var(--u)); top: calc(114 * var(--u)); width: calc(10 * var(--u)); height: calc(10 * var(--u)); margin: calc(-5 * var(--u)) 0 0 calc(-5 * var(--u));
+  border-radius: 50%; background: #fff; opacity: 0; transition: opacity 200ms ease;
+  box-shadow: 0 0 calc(10 * var(--u)) calc(3 * var(--u)) rgba(255,255,255,.9), 0 0 calc(28 * var(--u)) calc(8 * var(--u)) rgba(255,255,255,.35);
+}
+.linea-tiempo__chispa::before { /* estela */
+  content: ''; position: absolute; left: 50%; bottom: 50%; width: calc(3 * var(--u)); height: calc(90 * var(--u)); transform: translateX(-50%);
+  border-radius: calc(3 * var(--u)); background: linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,0));
+}
 .beneficio { position: relative; height: calc(228 * var(--u)); }
-.beneficio::after { /* nodo */
-  content: ''; position: absolute; top: 50%; left: calc(535 * var(--u)); width: calc(34 * var(--u)); height: calc(34 * var(--u));
+.beneficio__nodo {
+  position: absolute; top: 50%; left: calc(535 * var(--u)); width: calc(34 * var(--u)); height: calc(34 * var(--u));
   transform: translate(-50%, -50%); border-radius: 50%; background: #D2D1D1; box-shadow: 0 0 calc(14 * var(--u)) rgba(255,255,255,.65);
 }
-.beneficio h3, .beneficio p { position: relative; z-index: 1; }
-.beneficio > * { width: calc(454 * var(--u)); }
-.beneficio::before { /* tarjeta */
-  content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: calc(454 * var(--u)); height: calc(191 * var(--u));
+.beneficio__nodo::after { /* onda que se expande al recibir la chispa */
+  content: ''; position: absolute; inset: 0; border-radius: 50%; border: calc(2 * var(--u)) solid rgba(255,255,255,.85); opacity: 0;
+}
+/* .beneficio__card ocupa toda la fila (alto entero) y se mueve entera; dentro van el fondo de la tarjeta y el texto */
+.beneficio__card { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding-left: calc(28 * var(--u)); }
+.beneficio--der .beneficio__card { padding-left: calc(651 * var(--u)); }
+.beneficio__fondo {
+  position: absolute; top: 50%; left: 0; width: calc(454 * var(--u)); height: calc(191 * var(--u)); transform: translateY(-50%);
   border-radius: calc(24 * var(--u)); border: 1px solid rgba(210,209,209,.55);
   background: linear-gradient(140deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.04) 60%, rgba(255,255,255,.12) 100%);
   backdrop-filter: blur(4px);
 }
-.beneficio--izq::before, .beneficio--izq > * { left: 0; }
-.beneficio--der::before { left: calc(618 * var(--u)); }
-.beneficio { display: flex; flex-direction: column; justify-content: center; padding-left: calc(28 * var(--u)); }
-.beneficio--der { padding-left: calc(618 * var(--u) + 33 * var(--u)); }
+.beneficio--der .beneficio__fondo { left: calc(618 * var(--u)); }
+.beneficio__brillo { /* destello que recorre el borde de la tarjeta: anillo de 1px recortado con máscara */
+  position: absolute; inset: -1px; border-radius: inherit; padding: 1px; overflow: hidden; pointer-events: none; opacity: 0;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.beneficio__brillo::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 60%; transform: translateX(-100%);
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95), rgba(255,255,255,0));
+}
+.beneficio h3, .beneficio p { position: relative; z-index: 1; }
 .beneficio h3 { font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(26 * var(--u)); line-height: calc(26.2 * var(--u)); color: #E6E6E6; }
 .beneficio .subrayado { display: inline-block; border-bottom: 1.5px solid #E6E6E6; padding-bottom: calc(5 * var(--u)); }
 .beneficio p { margin-top: calc(9 * var(--u)); font-size: calc(16.3 * var(--u)); line-height: calc(18.1 * var(--u)); color: #E6E6E6; letter-spacing: .02em; }
+
+/* ---- Animación: flujo de energía por la línea (JS marca el avance; solo con .anima) ----
+   La chispa baja con el scroll dibujando la línea; al llegar a cada punto, el punto se enciende con
+   una onda, su tarjeta entra desde su lado y un destello recorre el borde. Final = mockup. */
+.anima .linea-tiempo__linea { transform: scaleY(0); }
+.anima .beneficio__nodo { transform: translate(-50%, -50%) scale(.55); opacity: .3; transition: transform 300ms var(--ease-out), opacity 300ms var(--ease-out); }
+.anima .beneficio__card { opacity: 0; transform: translateX(calc(-24 * var(--u))); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+.anima .beneficio--der .beneficio__card { transform: translateX(calc(24 * var(--u))); }
+.anima .beneficio--activo .beneficio__nodo { transform: translate(-50%, -50%); opacity: 1; }
+.anima .beneficio--activo .beneficio__card { opacity: 1; transform: none; }
+.anima .beneficio--activo .beneficio__nodo::after { animation: onda-nodo 700ms var(--ease-out) both; }
+.anima .beneficio--activo .beneficio__brillo { animation: brillo-visible 1000ms linear 250ms both; }
+.anima .beneficio--activo .beneficio__brillo::before { animation: brillo-barrido 1000ms var(--ease-in-out) 250ms both; }
+@keyframes onda-nodo { from { transform: scale(1); opacity: .6; } to { transform: scale(2.2); opacity: 0; } }
+@keyframes brillo-visible { 0% { opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes brillo-barrido { from { transform: translateX(-100%); } to { transform: translateX(170%); } }
+@media (prefers-reduced-motion: reduce) {
+  .anima .linea-tiempo__linea { transform: none !important; }
+  .linea-tiempo__chispa { display: none; }
+  .anima .beneficio__nodo { transform: translate(-50%, -50%); }
+  .anima .beneficio__card, .anima .beneficio--der .beneficio__card { transform: none; }
+  .anima .beneficio--activo .beneficio__nodo::after, .anima .beneficio--activo .beneficio__brillo, .anima .beneficio--activo .beneficio__brillo::before { animation: none; }
+}
 
 /* =================== FAQ =================== */
 .faq { padding: calc(275 * var(--u)) 0 calc(135 * var(--u)); }
@@ -498,13 +543,16 @@ mark { background: none; color: inherit; }
   .beneficios { padding: 60px 0 50px; }
   .beneficios__titulo { margin-left: 0; font-size: 36px; line-height: 42px; }
   .linea-tiempo { margin: 30px 0 0; width: auto; padding-left: 34px; }
-  .linea-tiempo::before { left: 9px; top: 60px; bottom: 60px; width: 2px; }
-  .beneficio, .beneficio--der { height: auto; padding: 24px 20px; margin-bottom: 18px; }
-  .beneficio::before, .beneficio--der::before { left: 0; width: 100%; height: 100%; }
-  .beneficio::after { left: -25px; width: 20px; height: 20px; }
-  .beneficio > * { width: auto; }
+  .linea-tiempo__linea { left: 9px; top: 60px; bottom: 60px; width: 2px; }
+  .linea-tiempo__chispa { left: 10px; top: 60px; width: 8px; height: 8px; margin: -4px 0 0 -4px; }
+  .beneficio, .beneficio--der { height: auto; margin-bottom: 18px; }
+  .beneficio__card, .beneficio--der .beneficio__card { position: relative; inset: auto; padding: 24px 20px; }
+  .beneficio__fondo, .beneficio--der .beneficio__fondo { top: 0; left: 0; width: 100%; height: 100%; transform: none; }
+  .beneficio__nodo { left: -25px; width: 20px; height: 20px; }
   .beneficio h3 { font-size: 19px; line-height: 21px; }
   .beneficio p { font-size: 15px; line-height: 19px; }
+  .anima .beneficio__card, .anima .beneficio--der .beneficio__card { transform: translateY(16px); }
+  .anima .beneficio--activo .beneficio__card { transform: none; }
 
   .faq { padding: 60px 0 60px; }
   .faq__forma { position: static; width: 130px; margin-bottom: 10px; }
@@ -540,4 +588,9 @@ mark { background: none; color: inherit; }
   .footer__nav { font-size: 18px; line-height: 40px; }
   .footer__redes img { height: 34px; }
   .footer__deco { left: auto; right: -160px; top: 260px; width: 300px; opacity: .5; }
+}
+
+/* Móvil con movimiento reducido: las tarjetas de beneficios solo aparecen, sin desplazarse */
+@media (max-width: 759px) and (prefers-reduced-motion: reduce) {
+  .anima .beneficio__card, .anima .beneficio--der .beneficio__card { transform: none; }
 }
