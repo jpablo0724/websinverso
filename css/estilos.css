@@ -25,6 +25,9 @@
   --w-bk: 400;   /* Book */
   --w-md: 600;   /* Md   */
   --w-dm: 600;   /* Demi */
+
+  /* Curva de entrada (desaceleración fuerte) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --w-bd: 900;   /* Bold: Urbanist necesita 900 para igualar la cantidad de tinta de AG Bold (medido) */
 }
 
@@ -202,6 +205,33 @@ mark { background: none; color: inherit; }
 .pz-centro { transform: translateX(-50%); }
 .pieza__titulo { font-family: var(--f-titulo); font-weight: var(--w-bd); }
 .pieza__num { color: rgba(242,242,242,.5); }
+/* Cada pieza es una capa del tamaño del rompecabezas: así se mueve entera (forma, ícono y textos) */
+.pieza { position: absolute; inset: 0; }
+
+/* ---- Animación de ensamblado: las piezas entran desde su lado y encajan en orden 1 → 5 ----
+   Solo se activa con JS (clase .anima en <html>) y una sola vez, al entrar en pantalla. */
+.pieza--atraer    { --d: 200ms; --dx: 0;   --dy: -40; }
+.pieza--captar    { --d: 340ms; --dx: 40;  --dy: 0; }
+.pieza--gestionar { --d: 480ms; --dx: 0;   --dy: 40; }
+.pieza--convertir { --d: 620ms; --dx: 0;   --dy: 40; }
+.pieza--crecer    { --d: 760ms; --dx: -40; --dy: 0; }
+.anima .puzzle__logo { opacity: 0; transform: scale(.96); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+.anima .pieza {
+  opacity: 0; transform: translate(calc(var(--dx) * var(--u)), calc(var(--dy) * var(--u)));
+  transition: opacity 700ms var(--ease-out) var(--d), transform 700ms var(--ease-out) var(--d);
+}
+/* el contenido aparece justo cuando su pieza encaja: ícono, título y lista con 40 ms entre sí */
+.anima .pieza__icono, .anima .pieza__titulo, .anima .pieza__lista { opacity: 0; transition: opacity 450ms var(--ease-out); }
+.anima .pieza__icono  { transition-delay: calc(var(--d) + 350ms); }
+.anima .pieza__titulo { transition-delay: calc(var(--d) + 390ms); }
+.anima .pieza__lista  { transition-delay: calc(var(--d) + 430ms); }
+.puzzle--visible .puzzle__logo, .puzzle--visible .pieza { opacity: 1; transform: none; }
+.puzzle--visible .pieza__icono, .puzzle--visible .pieza__titulo, .puzzle--visible .pieza__lista { opacity: 1; }
+/* Movimiento reducido: solo fundido, sin desplazamiento */
+@media (prefers-reduced-motion: reduce) {
+  .anima .puzzle__logo, .anima .pieza { transform: none; }
+  .anima .pieza { transition: opacity 400ms ease calc(var(--d) * .5); }
+}
 
 /* =================== SERVICIOS =================== */
 .servicios { position: relative; padding: calc(133 * var(--u)) 0 calc(139 * var(--u)); }
@@ -410,6 +440,8 @@ mark { background: none; color: inherit; }
   .metodo__sub { font-size: 15px; line-height: 20px; margin-top: 12px; }
   .metodo__sub br { display: none; }
   .puzzle { width: auto; height: auto; margin-top: 34px; display: grid; gap: 14px; }
+  /* en móvil las tarjetas suben 24 px una tras otra */
+  .pieza--atraer, .pieza--captar, .pieza--gestionar, .pieza--convertir, .pieza--crecer { --dx: 0; --dy: 24; }
   .puzzle__logo { position: static; width: 150px; margin: 0 auto 10px; order: -1; }
   .pieza { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
     border: 1.5px solid rgba(255,255,255,.85); border-radius: 22px; box-shadow: 0 0 14px rgba(255,255,255,.25), inset 0 0 10px rgba(255,255,255,.08);
