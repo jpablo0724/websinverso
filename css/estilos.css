@@ -83,7 +83,12 @@ mark { background: none; color: inherit; }
 /* =================== MANIFIESTO =================== */
 .manifiesto {
   position: relative; overflow: hidden; min-height: calc(681 * var(--u));
-  background: radial-gradient(ellipse 70% 60% at 50% 40%, #1d1d1d 0%, var(--negro) 70%);
+  /* Viñeta medida en el mockup: centro #141414, luz en esquina sup. derecha e inf. izquierda (~#363636) */
+  background:
+    /* base más oscura que #141414 porque el grano del body suma ~8 de brillo */
+    radial-gradient(ellipse calc(380 * var(--u)) calc(820 * var(--u)) at 100% 0%, #343434 0%, rgba(52,52,52,0) 100%),
+    radial-gradient(ellipse calc(385 * var(--u)) calc(740 * var(--u)) at 0% 100%, #343434 0%, rgba(52,52,52,0) 100%),
+    #0c0c0c;
   padding: calc(258 * var(--u)) 0 calc(200 * var(--u));
 }
 .manifiesto__deco { width: calc(447 * var(--u)); opacity: .9; }
