@@ -227,10 +227,36 @@ mark { background: none; color: inherit; }
 .anima .pieza__lista  { transition-delay: calc(var(--d) + 430ms); }
 .puzzle--visible .puzzle__logo, .puzzle--visible .pieza { opacity: 1; transform: none; }
 .puzzle--visible .pieza__icono, .puzzle--visible .pieza__titulo, .puzzle--visible .pieza__lista { opacity: 1; }
+/* ---- Opción 2: encendido de neón (se elige con ?anim=neon) ----
+   Las siluetas empiezan apagadas; cada pieza se enciende con un parpadeo de tubo de neón en
+   orden 1 → 5, luego su texto, y al final se prende el logo del centro. Las piezas no se mueven. */
+.anima-neon .pieza--atraer    { --d: 200ms; }
+.anima-neon .pieza--captar    { --d: 420ms; }
+.anima-neon .pieza--gestionar { --d: 640ms; }
+.anima-neon .pieza--convertir { --d: 860ms; }
+.anima-neon .pieza--crecer    { --d: 1080ms; }
+.anima.anima-neon .pieza { opacity: 1; transform: none; transition: none; }
+.anima.anima-neon .pieza__forma, .anima.anima-neon .pieza__icono { opacity: .07; transition: none; }
+.anima.anima-neon .puzzle__logo { transition-delay: 1700ms; transition-duration: 600ms; }
+.anima-neon .puzzle--visible .pieza__forma { animation: neon-encendido 700ms linear var(--d) both; }
+.anima-neon .puzzle--visible .pieza__icono { animation: neon-encendido 700ms linear calc(var(--d) + 120ms) both; }
+.anima.anima-neon .pieza__titulo { transition-delay: calc(var(--d) + 520ms); }
+.anima.anima-neon .pieza__lista  { transition-delay: calc(var(--d) + 580ms); }
+@keyframes neon-encendido {
+  0%   { opacity: .07; }
+  10%  { opacity: .9; }
+  16%  { opacity: .15; }
+  28%  { opacity: 1; }
+  34%  { opacity: .35; }
+  46%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
 /* Movimiento reducido: solo fundido, sin desplazamiento */
 @media (prefers-reduced-motion: reduce) {
   .anima .puzzle__logo, .anima .pieza { transform: none; }
   .anima .pieza { transition: opacity 400ms ease calc(var(--d) * .5); }
+  .anima-neon .puzzle--visible .pieza__forma, .anima-neon .puzzle--visible .pieza__icono, .anima-neon .puzzle--visible .pieza { animation: none; opacity: 1; transition: opacity 400ms ease calc(var(--d) * .5); }
 }
 
 /* =================== SERVICIOS =================== */
@@ -442,6 +468,10 @@ mark { background: none; color: inherit; }
   .puzzle { width: auto; height: auto; margin-top: 34px; display: grid; gap: 14px; }
   /* en móvil las tarjetas suben 24 px una tras otra */
   .pieza--atraer, .pieza--captar, .pieza--gestionar, .pieza--convertir, .pieza--crecer { --dx: 0; --dy: 24; }
+  /* neón en móvil: el contorno es el borde de la tarjeta, así que parpadea la tarjeta entera */
+  .anima.anima-neon .pieza { opacity: .07; }
+  .anima-neon .puzzle--visible .pieza { animation: neon-encendido 700ms linear var(--d) both; }
+  .anima.anima-neon .pieza__forma { animation: none; }
   .puzzle__logo { position: static; width: 150px; margin: 0 auto 10px; order: -1; }
   .pieza { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
     border: 1.5px solid rgba(255,255,255,.85); border-radius: 22px; box-shadow: 0 0 14px rgba(255,255,255,.25), inset 0 0 10px rgba(255,255,255,.08);
