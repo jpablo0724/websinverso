@@ -434,8 +434,8 @@ mark { background: none; color: inherit; }
   .servicio:hover { transform: scale(1.08); z-index: 1; }
 }
 .servicio h3 { font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(28.7 * var(--u)); line-height: 1; }
-.servicio p { margin-top: calc(9 * var(--u)); max-width: calc(370 * var(--u)); font-size: calc(13.4 * var(--u)); line-height: calc(14.8 * var(--u)); font-weight: 600; }
-.servicio p.ancho { max-width: calc(450 * var(--u)); font-size: calc(12.6 * var(--u)); line-height: calc(13.6 * var(--u)); }
+.servicio p { margin-top: calc(9 * var(--u)); max-width: calc(400 * var(--u)); font-size: calc(15.6 * var(--u)); line-height: calc(18.2 * var(--u)); font-weight: 600; }
+.servicio p.ancho { max-width: calc(460 * var(--u)); font-size: calc(14.6 * var(--u)); line-height: calc(17 * var(--u)); }
 
 /* =================== BENEFICIOS =================== */
 .beneficios {
@@ -713,7 +713,7 @@ mark { background: none; color: inherit; }
   .servicios__grid { margin: 34px 0 0; width: auto; grid-template-columns: 1fr; row-gap: 14px; }
   .servicio, .servicio--centro { width: auto; height: auto; min-height: 180px; border-radius: 20px; background-size: cover; padding: 70px 20px 22px; }
   .servicio h3 { font-size: 22px; }
-  .servicio p, .servicio p.ancho { font-size: 13.5px; line-height: 17px; max-width: none; }
+  .servicio p, .servicio p.ancho { font-size: 15px; line-height: 19px; max-width: none; }
 
   .beneficios { padding: 60px 0 50px; }
   .beneficios__titulo { margin-left: 0; font-size: 36px; line-height: 42px; }
