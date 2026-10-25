@@ -26,6 +26,18 @@ if (puzzle) {
   observador.observe(puzzle);
 }
 
+// Enemigo: las piezas del icono empiezan a fragmentarse cuando la sección entra en pantalla.
+const enemigo = document.querySelector('.enemigo');
+if (enemigo) {
+  const observadorEnemigo = new IntersectionObserver((entradas) => {
+    if (entradas.some((e) => e.isIntersecting)) {
+      enemigo.classList.add('enemigo--visible');
+      observadorEnemigo.disconnect();
+    }
+  }, { threshold: 0.3 });
+  observadorEnemigo.observe(enemigo);
+}
+
 // Línea de beneficios: la chispa baja con el scroll dibujando la línea. Cuando la línea llega a un
 // punto (a la altura del 60 % de la pantalla), ese beneficio se activa: punto, onda, tarjeta y destello.
 const lineaTiempo = document.querySelector('.linea-tiempo');

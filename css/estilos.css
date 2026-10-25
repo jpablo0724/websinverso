@@ -206,6 +206,27 @@ mark { background: none; color: inherit; }
 /* =================== EL VERDADERO ENEMIGO =================== */
 .enemigo { padding: calc(130 * var(--u)) 0 calc(156 * var(--u)); }
 .enemigo__forma { position: absolute; left: calc(160 * var(--u)); top: calc(7 * var(--u)); width: calc(470 * var(--u)); transform: rotate(-55deg); }
+/* Fragmentación: 4 copias de la imagen, cada una recortada a una pieza (coordenadas sobre la imagen de 1100×950).
+   En reposo coinciden exactas con el mockup; en el ciclo cada pieza se aleja hacia afuera, flota y vuelve. */
+.frag { display: block; width: 100%; }
+.frag + .frag { position: absolute; inset: 0; }
+.frag--cubo1  { clip-path: polygon(0% 0%, 42.73% 0%, 42.73% 27.89%, 26.36% 27.89%, 11.82% 34.74%, 0% 45.26%);
+  transform-origin: 32% 13%; --dx: -5%; --dy: -6%; --r: -9deg; }
+.frag--oscuro { clip-path: polygon(0% 45.26%, 11.82% 34.74%, 26.36% 27.89%, 60.91% 27.89%, 60.91% 47.37%, 38.18% 49.47%, 38.18% 75.79%, 50.91% 75.79%, 61.82% 80%, 61.82% 100%, 0% 100%);
+  transform-origin: 30% 65%; --dx: -4%; --dy: 4%; --r: -4deg; }
+.frag--cromo  { clip-path: polygon(42.73% 0%, 100% 0%, 100% 61.05%, 81.82% 70%, 67.27% 74.21%, 61.82% 80%, 50.91% 75.79%, 38.18% 75.79%, 38.18% 49.47%, 60.91% 47.37%, 60.91% 27.89%, 42.73% 27.89%);
+  transform-origin: 70% 35%; --dx: 4%; --dy: -3%; --r: 4deg; }
+.frag--cubo2  { clip-path: polygon(67.27% 74.21%, 81.82% 70%, 100% 61.05%, 100% 100%, 61.82% 100%, 61.82% 80%);
+  transform-origin: 77% 85%; --dx: 5%; --dy: 6%; --r: 9deg; }
+.enemigo--visible .frag { animation: fragmenta 7s ease-in-out infinite; }
+@keyframes fragmenta {
+  0%, 18%   { transform: none; }
+  45%, 62%  { transform: translate(var(--dx), var(--dy)) rotate(var(--r)); }
+  90%, 100% { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enemigo--visible .frag { animation: none; }
+}
 .enemigo__texto { margin-left: calc(668 * var(--u)); width: calc(545 * var(--u)); position: relative; }
 .titulo-sub { font-family: var(--f-titulo); font-size: calc(32.8 * var(--u)); line-height: calc(33 * var(--u)); }
 .enemigo__grande {

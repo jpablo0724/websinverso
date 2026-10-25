@@ -78,7 +78,13 @@
 <!-- ============ EL VERDADERO ENEMIGO ============ -->
 <section class="enemigo">
   <div class="lienzo">
-    <img src="assets/img/forma-eslabones.webp" alt="" class="enemigo__forma">
+    <!-- La misma imagen recortada en 4 piezas (cubos y los dos eslabones) que se separan y se vuelven a unir -->
+    <div class="enemigo__forma" aria-hidden="true">
+      <img src="assets/img/forma-eslabones.webp" alt="" class="frag frag--cubo1">
+      <img src="assets/img/forma-eslabones.webp" alt="" class="frag frag--oscuro">
+      <img src="assets/img/forma-eslabones.webp" alt="" class="frag frag--cromo">
+      <img src="assets/img/forma-eslabones.webp" alt="" class="frag frag--cubo2">
+    </div>
     <div class="enemigo__texto">
       <h2 class="titulo-sub">
         <span class="bk">EL VERDADERO ENEMIGO<br>DE LAS MARCAS ES LA</span>

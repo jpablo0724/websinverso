@@ -6,3 +6,6 @@ diseno/fuentes/
 # Skills de Claude Code instaladas con npx skills (herramientas locales, no son parte del sitio)
 .claude/
 skills-lock.json
+
+# Carpeta de trabajo local (herramientas, capturas y pruebas); no es parte del sitio
+diseno/trabajo/
