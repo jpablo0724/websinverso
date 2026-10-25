@@ -428,6 +428,11 @@ mark { background: none; color: inherit; }
 .servicio--naranja { background-image: url('../assets/img/card-naranja.webp'); }
 .servicio--azul    { background-image: url('../assets/img/card-azul.webp'); }
 .servicio--centro { grid-column: 1 / -1; justify-self: center; width: calc(511 * var(--u)); }
+/* Zoom al pasar el mouse: solo con puntero real (en táctil el hover queda pegado) y sin "reducir movimiento" */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .servicio { position: relative; transition: transform 250ms var(--ease-out); }
+  .servicio:hover { transform: scale(1.05); z-index: 1; }
+}
 .servicio h3 { font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(28.7 * var(--u)); line-height: 1; }
 .servicio p { margin-top: calc(9 * var(--u)); max-width: calc(370 * var(--u)); font-size: calc(13.4 * var(--u)); line-height: calc(14.8 * var(--u)); font-weight: 600; }
 .servicio p.ancho { max-width: calc(450 * var(--u)); font-size: calc(12.6 * var(--u)); line-height: calc(13.6 * var(--u)); }
