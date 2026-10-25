@@ -71,7 +71,7 @@ mark { background: none; color: inherit; }
 .header { background: var(--negro); height: calc(200 * var(--u)); position: relative; z-index: 20; }
 .header__in { height: 100%; display: flex; align-items: center; padding: 0 calc(64 * var(--u)); }
 .header__logo img { width: calc(192 * var(--u)); }
-.header__nav { display: flex; gap: calc(58 * var(--u)); margin-left: calc(174 * var(--u)); font-size: calc(20.1 * var(--u)); color: #F1F1F1; }
+.header__nav { display: flex; gap: calc(44 * var(--u)); margin-left: calc(174 * var(--u)); font-size: calc(16 * var(--u)); color: #F1F1F1; }
 .boton--header { margin-left: auto; width: calc(185 * var(--u)); height: calc(54 * var(--u)); font-size: calc(20.1 * var(--u)); }
 .boton--header .flecha { height: calc(15 * var(--u)); }
 .header__hamburguesa { display: none; }
@@ -604,6 +604,7 @@ mark { background: none; color: inherit; }
 .footer__nav { position: absolute; left: calc(232 * var(--u)); top: calc(305 * var(--u)); display: flex; flex-direction: column; font-size: calc(25.6 * var(--u)); line-height: calc(61.3 * var(--u)); color: #E2E2E2; }
 .footer__redes { position: absolute; right: calc(230 * var(--u)); top: calc(588 * var(--u)); display: flex; gap: calc(26 * var(--u)); align-items: center; }
 .footer__redes img { height: calc(48 * var(--u)); width: auto; opacity: .92; }
+.footer__derechos { position: absolute; left: calc(232 * var(--u)); top: calc(600 * var(--u)); font-size: calc(17 * var(--u)); color: #BDBDBD; }
 
 /* =========================================================
    MÓVIL (menos de 760 px): una columna
@@ -614,6 +615,7 @@ mark { background: none; color: inherit; }
   .lienzo { width: 100%; padding: 0 20px; }
 
   .header { height: 76px; position: sticky; top: 0; }
+  section[id] { scroll-margin-top: 76px; }
   .header__in { padding: 0 20px; }
   .header__logo img { width: 104px; }
   .boton--header { display: none; }
@@ -757,7 +759,8 @@ mark { background: none; color: inherit; }
 
   .footer { border-radius: 30px 30px 0 0; min-height: 0; }
   .footer__in { min-height: 0; display: grid; gap: 28px; padding: 46px 28px 40px; }
-  .footer__logo, .footer__lema, .footer__nav, .footer__redes { position: static; }
+  .footer__logo, .footer__lema, .footer__nav, .footer__redes, .footer__derechos { position: static; }
+  .footer__derechos { font-size: 14px; }
   .footer__logo { width: 160px; }
   .footer__lema { text-align: left; font-size: 30px; line-height: 32px; }
   .footer__nav { font-size: 18px; line-height: 40px; }
