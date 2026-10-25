@@ -26,12 +26,18 @@ if (puzzle) {
   observador.observe(puzzle);
 }
 
-// Enemigo: las piezas del icono empiezan a fragmentarse cuando la sección entra en pantalla.
+// Enemigo: las piezas del icono empiezan a moverse cuando la sección entra en pantalla.
+// El aro oscuro (SMIL) queda en pausa en su posición del mockup hasta entonces, o siempre con "reducir movimiento".
 const enemigo = document.querySelector('.enemigo');
 if (enemigo) {
+  const svgOscuro = enemigo.querySelector('.frag--oscuro');
+  svgOscuro.pauseAnimations();
+  svgOscuro.setCurrentTime(0);
+  const quieto = window.matchMedia('(prefers-reduced-motion: reduce)');
   const observadorEnemigo = new IntersectionObserver((entradas) => {
     if (entradas.some((e) => e.isIntersecting)) {
       enemigo.classList.add('enemigo--visible');
+      if (!quieto.matches) svgOscuro.unpauseAnimations();
       observadorEnemigo.disconnect();
     }
   }, { threshold: 0.3 });
