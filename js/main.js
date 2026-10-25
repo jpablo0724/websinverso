@@ -43,6 +43,18 @@ if (enemigo) {
   observadorEnemigo.observe(enemigo);
 }
 
+// Pizarra: los destellos empiezan a recorrer las flechas cuando la foto entra en pantalla.
+const pizarra = document.querySelector('.pizarra');
+if (pizarra) {
+  const observadorPizarra = new IntersectionObserver((entradas) => {
+    if (entradas.some((e) => e.isIntersecting)) {
+      pizarra.classList.add('pizarra--visible');
+      observadorPizarra.disconnect();
+    }
+  }, { threshold: 0.4 });
+  observadorPizarra.observe(pizarra);
+}
+
 // Línea de beneficios: la chispa baja con el scroll dibujando la línea. Cuando la línea llega a un
 // punto (a la altura del 60 % de la pantalla), ese beneficio se activa: punto, onda, tarjeta y destello.
 const lineaTiempo = document.querySelector('.linea-tiempo');

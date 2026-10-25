@@ -265,6 +265,38 @@ mark { background: none; color: inherit; }
 /* la foto arranca detrás de la tarjeta blanca: sus esquinas superiores asoman a los lados */
 .pizarra__foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; filter: brightness(.82); }
 .pizarra__textos { height: 100%; }
+
+/* Flujo hacia el centro: el SVG replica el recorte de la foto (object-fit: cover, --foto-x = object-position x)
+   para que cada destello caiga justo sobre su flecha. Ciclo de 4.2 s: todos viajan a la misma velocidad,
+   arrancan escalonados según el largo de su flecha y llegan juntos (~33 %); el recuadro central se ilumina al recibirlos. */
+.pizarra__foto { container-type: size; --foto-x: .5; }
+.pizarra__flujo {
+  --ancho: max(100cqw, 100cqh * 1688 / 1501);
+  position: absolute; width: var(--ancho); aspect-ratio: 1688 / 1501; pointer-events: none;
+  left: calc((100cqw - var(--ancho)) * var(--foto-x)); top: calc((100cqh - var(--ancho) * 1501 / 1688) / 2);
+}
+.flujo__pulsos path {
+  --cola: 40; --max: 194;
+  fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round;
+  stroke-dasharray: calc(var(--cola) * 1px) 2000px;
+  stroke-dashoffset: calc((var(--cola) + var(--max) - var(--len)) * 1px);
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.9));
+}
+.flujo__centro { fill: none; stroke: #fff; stroke-width: 5; opacity: 0; filter: drop-shadow(0 0 12px rgba(255,255,255,.8)); }
+.pizarra--visible .flujo__pulsos path { animation: flujo-pulso 4.2s linear infinite; }
+.pizarra--visible .flujo__centro { animation: flujo-centro 4.2s linear infinite; }
+@keyframes flujo-pulso {
+  0%        { stroke-dashoffset: calc((var(--cola) + var(--max) - var(--len)) * 1px); }
+  40%, 100% { stroke-dashoffset: calc(var(--len) * -1px); }
+}
+@keyframes flujo-centro {
+  0%, 31% { opacity: 0; animation-timing-function: var(--ease-out); }
+  38%     { opacity: .85; animation-timing-function: var(--ease-out); }
+  75%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pizarra--visible .flujo__pulsos path, .pizarra--visible .flujo__centro { animation: none; }
+}
 .pizarra__frase { position: absolute; font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(37.2 * var(--u)); line-height: calc(37.5 * var(--u)); color: #fff; }
 .pizarra__frase--der { right: calc(218 * var(--u)); top: calc(349 * var(--u)); text-align: right; }
 .pizarra__frase--izq { left: calc(217 * var(--u)); top: calc(672 * var(--u)); }
@@ -627,6 +659,7 @@ mark { background: none; color: inherit; }
   .pizarra__foto { border-radius: 0 0 28px 28px; border: 0; }
   .pizarra__foto { height: 480px; border-radius: 0 0 28px 28px; }
   .pizarra__foto > img { object-position: 60% 50%; }
+  .pizarra__foto { --foto-x: .6; }
   .pizarra__frase { font-size: 24px; line-height: 26px; }
   .pizarra__frase--der { right: 20px; top: 76px; }
   .pizarra__frase--izq { left: 20px; top: auto; bottom: 40px; }

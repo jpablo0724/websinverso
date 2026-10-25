@@ -166,6 +166,19 @@
 <section class="pizarra">
   <div class="pizarra__foto">
     <img src="assets/img/foto-pizarra.webp" alt="Equipo de Sinverso frente a una pizarra conectando redes sociales, CRM, WhatsApp e inteligencia artificial">
+    <!-- Flujo: un destello recorre cada flecha dibujada en la pizarra y todos llegan a la vez al recuadro central
+         (coordenadas sobre la foto de 1688×1501; --len = largo de cada flecha) -->
+    <svg class="pizarra__flujo" viewBox="0 0 1688 1501" aria-hidden="true">
+      <rect class="flujo__centro" x="880" y="805" width="177" height="160" rx="8"/>
+      <g class="flujo__pulsos">
+        <path style="--len:140" d="M848 744 L930 739 L930 797"/>
+        <path style="--len:194" d="M1140 719 L1013 729 L1011 795"/>
+        <path style="--len:45"  d="M1112 884 L1067 884"/>
+        <path style="--len:24"  d="M847 892 L871 892"/>
+        <path style="--len:100" d="M927 1069 L937 1067 L936 977"/>
+        <path style="--len:145" d="M1035 1081 L993 1080 L992 977"/>
+      </g>
+    </svg>
     <div class="lienzo pizarra__textos">
       <p class="pizarra__frase pizarra__frase--der">No creemos<br>en acciones aisladas.</p>
       <p class="pizarra__frase pizarra__frase--izq">Identificamos la causa<br>antes que el síntoma.</p>
