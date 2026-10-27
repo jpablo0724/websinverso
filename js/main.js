@@ -128,3 +128,15 @@ if (videoBanner && document.documentElement.classList.contains('banner-b')) {
   reducir.addEventListener('change', aplicar);
   aplicar();
 }
+
+// Banner: el video (~800 KB) se pide cuando la página ya cargó, para que no le quite conexión
+// a la portada, las fuentes y el CSS. Mientras tanto se ve la portada (poster), que es su primer cuadro.
+const videoBanner = document.querySelector('.banner__video[data-src]');
+if (videoBanner) {
+  const cargarVideo = () => {
+    videoBanner.src = videoBanner.dataset.src;
+    videoBanner.play().catch(() => {});
+  };
+  if (document.readyState === 'complete') cargarVideo();
+  else window.addEventListener('load', cargarVideo, { once: true });
+}

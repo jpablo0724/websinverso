@@ -6,8 +6,10 @@
    las secciones se reorganizan en una sola columna.
    ========================================================= */
 
-@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter-italic.ttf') format('truetype'); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter-latin.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter-italic-latin.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+/* Urbanist alojada en el sitio (antes Google Fonts, que bloqueaba la primera pintura) */
+@font-face { font-family: 'Urbanist'; src: url('../assets/fonts/urbanist-latin.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
 
 :root {
   --u: min(1px, calc(100vw / 1440));
