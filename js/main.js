@@ -103,7 +103,8 @@ if (lineaTiempo && document.documentElement.classList.contains('anima')) {
   };
   window.addEventListener('scroll', pedir, { passive: true });
   window.addEventListener('resize', pedir);
-  actualizar();
+  // primera medición en el siguiente cuadro, para no forzar un cálculo de diseño mientras carga la página
+  requestAnimationFrame(actualizar);
 }
 
 // Banner: el video (~800 KB) se pide cuando la página ya cargó, para que no le quite conexión
@@ -120,8 +121,12 @@ if (videoBanner && document.documentElement.classList.contains('banner-b')) {
     videoBanner.src = videoBanner.dataset.src;
     reproducir();
   };
-  if (document.readyState === 'complete') cargarVideo();
-  else window.addEventListener('load', cargarVideo, { once: true });
+  // Arranca cuando el navegador queda libre tras la carga (a más tardar 1,5 s después).
+  const enReposo = () => ('requestIdleCallback' in window
+    ? requestIdleCallback(cargarVideo, { timeout: 1500 })
+    : setTimeout(cargarVideo, 200));
+  if (document.readyState === 'complete') enReposo();
+  else window.addEventListener('load', enReposo, { once: true });
 
   // Algunos celulares (iPhone en modo de bajo consumo, ahorro de batería) bloquean la
   // reproducción automática: se reintenta con el primer toque o desplazamiento.
