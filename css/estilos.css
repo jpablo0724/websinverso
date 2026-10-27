@@ -602,12 +602,13 @@ mark { background: none; color: inherit; }
 .footer__logo { position: absolute; left: calc(232 * var(--u)); top: calc(60 * var(--u)); width: calc(293 * var(--u)); opacity: .85; }
 .footer__lema { position: absolute; right: calc(233 * var(--u)); top: calc(80 * var(--u)); text-align: right; font-family: var(--f-titulo); font-weight: var(--w-bd); font-size: calc(59.4 * var(--u)); line-height: calc(59.4 * var(--u)); color: #DADADA; }
 .footer__nav { position: absolute; left: calc(232 * var(--u)); top: calc(305 * var(--u)); display: flex; flex-direction: column; font-size: calc(20 * var(--u)); line-height: calc(50 * var(--u)); color: #E2E2E2; }
-.footer__contacto { position: absolute; left: 50%; transform: translateX(-50%); top: calc(305 * var(--u)); display: flex; flex-direction: column; align-items: flex-start; font-style: normal; font-size: calc(20 * var(--u)); line-height: calc(50 * var(--u)); color: #fff; }
+.footer__centro { position: absolute; left: 50%; transform: translateX(-50%); top: calc(305 * var(--u)); display: flex; flex-direction: column; align-items: flex-start; gap: calc(28 * var(--u)); }
+.footer__contacto { display: flex; flex-direction: column; align-items: flex-start; font-style: normal; font-size: calc(20 * var(--u)); line-height: calc(50 * var(--u)); color: #fff; }
 .footer__contacto a { display: flex; align-items: center; gap: calc(12 * var(--u)); }
 .footer__contacto svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; }
-.footer__redes { position: absolute; right: calc(230 * var(--u)); top: calc(588 * var(--u)); display: flex; gap: calc(26 * var(--u)); align-items: center; }
+.footer__redes { display: flex; gap: calc(26 * var(--u)); align-items: center; }
 .footer__redes img { height: calc(48 * var(--u)); width: auto; opacity: .92; }
-.footer__derechos { position: absolute; left: calc(232 * var(--u)); top: calc(600 * var(--u)); font-size: calc(17 * var(--u)); color: #BDBDBD; }
+.footer__derechos { position: absolute; left: 0; right: 0; text-align: center; top: calc(600 * var(--u)); font-size: calc(17 * var(--u)); color: #BDBDBD; }
 
 /* =========================================================
    MÓVIL (menos de 760 px): una columna
@@ -762,8 +763,9 @@ mark { background: none; color: inherit; }
 
   .footer { border-radius: 30px 30px 0 0; min-height: 0; }
   .footer__in { min-height: 0; display: grid; gap: 28px; padding: 46px 28px 40px; }
-  .footer__logo, .footer__lema, .footer__nav, .footer__contacto, .footer__redes, .footer__derechos { position: static; }
-  .footer__contacto { transform: none; font-size: 16px; line-height: 36px; }
+  .footer__logo, .footer__lema, .footer__nav, .footer__centro, .footer__derechos { position: static; }
+  .footer__centro { transform: none; gap: 28px; }
+  .footer__contacto { font-size: 16px; line-height: 36px; }
   .footer__contacto svg { width: 20px; height: 20px; }
   .footer__derechos { font-size: 14px; }
   .footer__logo { width: 160px; }

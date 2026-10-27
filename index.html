@@ -74,7 +74,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;400;600;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css?v=20261026d">
+  <link rel="stylesheet" href="css/estilos.css?v=20261026e">
   <!-- Activa las animaciones de entrada solo si hay JS; sin JS todo se ve completo. ?anim=neon elige la opción 2 del rompecabezas; ?banner=b prueba el banner animado en código (plan B) -->
   <script>document.documentElement.classList.add('anima'); if (/[?&]anim=neon/.test(location.search)) document.documentElement.classList.add('anima-neon'); if (/[?&]banner=b/.test(location.search)) document.documentElement.classList.add('banner-b');</script>
 </head>
@@ -524,20 +524,22 @@
       <a href="#pie">Contacto</a>
       <a href="#nosotros">Sobre Nosotros</a>
     </nav>
-    <address class="footer__contacto">
-      <a href="mailto:isa.ospina@sinverso.com">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 5.5h18v13H3z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m3 6 9 7 9-7"/></svg>
-        isa.ospina@sinverso.com
-      </a>
-      <a href="https://wa.me/573127454610" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6.6 3.5H4.2a1 1 0 0 0-1 1.1c.5 8.6 7.6 15.7 16.2 16.2a1 1 0 0 0 1.1-1v-2.4a1 1 0 0 0-.8-1l-3.4-.8a1 1 0 0 0-1 .3l-1.6 1.7a13 13 0 0 1-6.3-6.3l1.7-1.6a1 1 0 0 0 .3-1l-.8-3.4a1 1 0 0 0-1-.8Z"/></svg>
-        (+57) 312 745 4610
-      </a>
-    </address>
-    <div class="footer__redes">
-      <a href="https://wa.me/573127454610" target="_blank" rel="noopener" aria-label="WhatsApp"><img loading="lazy" decoding="async" src="assets/img/red-whatsapp.webp" alt=""></a>
-      <a href="https://www.facebook.com/sinverso" target="_blank" rel="noopener" aria-label="Facebook"><img loading="lazy" decoding="async" src="assets/img/red-facebook.svg" alt=""></a>
-      <a href="https://www.instagram.com/sinverso_agencia/" target="_blank" rel="noopener" aria-label="Instagram"><img loading="lazy" decoding="async" src="assets/img/red-instagram.webp" alt=""></a>
+    <div class="footer__centro">
+      <address class="footer__contacto">
+        <a href="mailto:isa.ospina@sinverso.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 5.5h18v13H3z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m3 6 9 7 9-7"/></svg>
+          isa.ospina@sinverso.com
+        </a>
+        <a href="https://wa.me/573127454610" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6.6 3.5H4.2a1 1 0 0 0-1 1.1c.5 8.6 7.6 15.7 16.2 16.2a1 1 0 0 0 1.1-1v-2.4a1 1 0 0 0-.8-1l-3.4-.8a1 1 0 0 0-1 .3l-1.6 1.7a13 13 0 0 1-6.3-6.3l1.7-1.6a1 1 0 0 0 .3-1l-.8-3.4a1 1 0 0 0-1-.8Z"/></svg>
+          (+57) 312 745 4610
+        </a>
+      </address>
+      <div class="footer__redes">
+        <a href="https://wa.me/573127454610" target="_blank" rel="noopener" aria-label="WhatsApp"><img loading="lazy" decoding="async" src="assets/img/red-whatsapp.webp" alt=""></a>
+        <a href="https://www.facebook.com/sinverso" target="_blank" rel="noopener" aria-label="Facebook"><img loading="lazy" decoding="async" src="assets/img/red-facebook.svg" alt=""></a>
+        <a href="https://www.instagram.com/sinverso_agencia/" target="_blank" rel="noopener" aria-label="Instagram"><img loading="lazy" decoding="async" src="assets/img/red-instagram.webp" alt=""></a>
+      </div>
     </div>
     <p class="footer__derechos">© 2026 Sinverso. Todos los derechos reservados.</p>
   </div>
@@ -548,6 +550,6 @@
   <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C8.87 3 3.03 8.83 3.03 16c0 2.29.6 4.53 1.74 6.5L3 29l6.68-1.75A12.95 12.95 0 0 0 16.04 29C23.2 29 29.04 23.17 29.04 16S23.2 3 16.04 3Zm0 23.8c-1.95 0-3.86-.52-5.53-1.51l-.4-.24-3.96 1.04 1.06-3.86-.26-.4A10.76 10.76 0 0 1 5.240 16c0-5.95 4.85-10.8 10.8-10.8 5.96 0 10.8 4.85 10.8 10.8 0 5.96-4.84 10.8-10.8 10.8Zm5.92-8.08c-.32-.16-1.92-.95-2.22-1.06-.3-.11-.51-.16-.73.16-.21.32-.84 1.06-1.03 1.270-.19.22-.38.24-.7.08-.33-.16-1.38-.5-2.62-1.6-.97-.87-1.62-1.93-1.81-2.25-.19-.33-.02-.5.14-.66.15-.15.33-.38.49-.57.16-.19.21-.32.32-.54.11-.22.05-.4-.03-.57-.08-.16-.73-1.76-1-2.41-.26-.63-.53-.55-.73-.56h-.62c-.22 0-.57.08-.86.4-.3.33-1.14 1.11-1.14 2.7 0 1.6 1.17 3.14 1.33 3.36.16.21 2.3 3.5 5.56 4.910.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.92-.79 2.19-1.55.27-.76.27-1.41.19-1.55-.08-.13-.3-.21-.62-.38Z"/></svg>
 </a>
 
-<script src="js/main.js?v=20261026d"></script>
+<script src="js/main.js?v=20261026e"></script>
 </body>
 </html>
