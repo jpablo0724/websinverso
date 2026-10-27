@@ -772,3 +772,17 @@ mark { background: none; color: inherit; }
 @media (max-width: 759px) and (prefers-reduced-motion: reduce) {
   .anima .beneficio__card, .anima .beneficio--der .beneficio__card { transform: none; }
 }
+
+/* Botón flotante de WhatsApp */
+.whatsapp-flotante {
+  position: fixed; right: 24px; bottom: 24px; z-index: 50;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #25D366; color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+}
+.whatsapp-flotante svg { width: 34px; height: 34px; }
+@media (max-width: 759px) {
+  .whatsapp-flotante { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); width: 54px; height: 54px; }
+  .whatsapp-flotante svg { width: 30px; height: 30px; }
+}
