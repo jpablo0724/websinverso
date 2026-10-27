@@ -6,10 +6,11 @@
    las secciones se reorganizan en una sola columna.
    ========================================================= */
 
-@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter-latin.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter-italic-latin.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+/* Fuentes recortadas a lo que usa la página (diseno/trabajo/rendimiento/subset3.mjs): español + puntuación, ejes variables completos */
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/inter-italic.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
 /* Urbanist alojada en el sitio (antes Google Fonts, que bloqueaba la primera pintura) */
-@font-face { font-family: 'Urbanist'; src: url('../assets/fonts/urbanist-latin.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Urbanist'; src: url('../assets/fonts/urbanist.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
 
 :root {
   --u: min(1px, calc(100vw / 1440));
@@ -20,9 +21,10 @@
   --azul: #1641C4;
   --naranja: #FD5617;
 
-  /* Títulos: ITC Avant Garde Gothic Pro cuando esté la licencia; mientras, Urbanist */
-  --f-titulo: 'ITC Avant Garde Gothic Pro', 'Urbanist', 'Century Gothic', sans-serif;
-  --f-texto: 'Inter', system-ui, sans-serif;
+  /* Títulos: Urbanist mientras llega la licencia web de ITC Avant Garde Gothic Pro (entonces: @font-face propio
+     y ponerla primera aquí). Sin fuentes del sistema por nombre: buscarlas en cada carga costaba ~100 ms de CPU. */
+  --f-titulo: 'Urbanist', sans-serif;
+  --f-texto: 'Inter', sans-serif;
   --w-xl: 100;   /* XLt  */
   --w-bk: 400;   /* Book */
   --w-md: 600;   /* Md   */
