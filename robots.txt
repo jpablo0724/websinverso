@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jpablo0724.github.io/websinverso/sitemap.xml
+Sitemap: https://sinverso.com/sitemap.xml
