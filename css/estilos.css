@@ -83,7 +83,11 @@ mark { background: none; color: inherit; }
 /* =================== BANNER =================== */
 .banner { height: calc(691 * var(--u)); background: #1a1a1a; overflow: hidden; }
 /* El video (2.45:1) llena el banner recortando los bordes; su contenido va centrado. */
-.banner__video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.banner__video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+/* Sin el botón de "play" que iOS/Android ponen encima cuando bloquean la reproducción automática */
+.banner__video::-webkit-media-controls,
+.banner__video::-webkit-media-controls-start-playback-button,
+.banner__video::-webkit-media-controls-overlay-play-button { display: none !important; -webkit-appearance: none; }
 
 /* ---- Plan B del banner (?banner=b): animación en código, ciclo de 12 s ----
    0–4 s caos de palabras que se juntan · 4–6 s dos puntos (azul/naranja) trazan el rumbo ·

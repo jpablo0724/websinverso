@@ -106,37 +106,33 @@ if (lineaTiempo && document.documentElement.classList.contains('anima')) {
   actualizar();
 }
 
-// Banner: con "reducir movimiento" activo no se reproduce y queda fijo en el mensaje final.
-const videoBanner = document.querySelector('.banner__video');
-// Con ?banner=b se prueba la animación en código: el video se quita para que no se descargue.
-if (videoBanner && document.documentElement.classList.contains('banner-b')) {
-  videoBanner.removeAttribute('src');
-  videoBanner.load();
-  videoBanner.remove();
-} else if (videoBanner) {
-  const reducir = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const aplicar = () => {
-    if (reducir.matches) {
-      videoBanner.pause();
-      const alFinal = () => { videoBanner.currentTime = Math.max(0, videoBanner.duration - 0.1); };
-      if (videoBanner.readyState >= 1) alFinal();
-      else videoBanner.addEventListener('loadedmetadata', alFinal, { once: true });
-    } else {
-      videoBanner.play().catch(() => {});
-    }
-  };
-  reducir.addEventListener('change', aplicar);
-  aplicar();
-}
-
 // Banner: el video (~800 KB) se pide cuando la página ya cargó, para que no le quite conexión
 // a la portada, las fuentes y el CSS. Mientras tanto se ve la portada (poster), que es su primer cuadro.
+// Se reproduce solo, en bucle, en celular y escritorio.
 const videoBanner = document.querySelector('.banner__video[data-src]');
-if (videoBanner) {
+// Con ?banner=b se prueba la animación en código: el video se quita para que no se descargue.
+if (videoBanner && document.documentElement.classList.contains('banner-b')) {
+  videoBanner.remove();
+} else if (videoBanner) {
+  videoBanner.muted = true; // iOS y Chrome solo permiten reproducción automática sin sonido
+  const reproducir = () => videoBanner.play().catch(() => {});
   const cargarVideo = () => {
     videoBanner.src = videoBanner.dataset.src;
-    videoBanner.play().catch(() => {});
+    reproducir();
   };
   if (document.readyState === 'complete') cargarVideo();
   else window.addEventListener('load', cargarVideo, { once: true });
+
+  // Algunos celulares (iPhone en modo de bajo consumo, ahorro de batería) bloquean la
+  // reproducción automática: se reintenta con el primer toque o desplazamiento.
+  const alInteractuar = () => {
+    if (!videoBanner.paused) return;
+    reproducir();
+  };
+  ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach((ev) =>
+    window.addEventListener(ev, alInteractuar, { passive: true }));
+  // Al volver a la pestaña el navegador puede haberlo pausado.
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && videoBanner.src) reproducir();
+  });
 }
